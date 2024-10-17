@@ -17,7 +17,7 @@ library(effsize)
 
 #Working directory should be the Psychopy experiment directory.
 
-proje_wd <- "/Users/kihossei/Documents/GitHub/mfe_c_object"
+proje_wd <- "/Users/kihossei/Library/CloudStorage/GoogleDrive-hosseinikianoosh@gmail.com/My Drive/My Digital Life/Professional/GitHub_Repos/mfe-c-object-dataset"
 setwd(proje_wd)
 
 processed_file_input <- paste(proje_wd, "derivatives", "psychopy", "stat_output", sep ="/", collapse = NULL) # input data directory
@@ -45,7 +45,6 @@ remove_outliers <- function(x) {
 new_main_df <- main_df
 new_main_df[-c(1, ncol(new_main_df))] <- apply(main_df[-c(1, ncol(main_df))], 2, remove_outliers)
 main_df <- new_main_df
-
 
 
 # flanker task stats
@@ -160,6 +159,37 @@ summary(lm_for_cor_fit_line)
 cor.test(main_df$scaared_b_scrdSoc_s1_r1_e1, main_df$hitRate_error_minus_correct, method = 'pearson', na.action = na.omit)
 ggplot(main_df, aes(x=scaared_b_scrdSoc_s1_r1_e1, y=hitRate_error_minus_correct)) + geom_point(size = 4) + geom_smooth(method="lm") +
   labs(x = "SCAARED social anxiety score", y = "Error vs. Correct Hit rate") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + theme(axis.text = element_text(size = 15)) + theme(text = element_text(size = 18))
+lm_for_cor_fit_line <- lm(error_hitRate ~ scaared_b_scrdSoc_s1_r1_e1, main_df)
+summary(lm_for_cor_fit_line)
+ggplot(main_df, aes(x=scaared_b_scrdSoc_s1_r1_e1, y=error_hitRate)) + geom_point(size = 4) + geom_smooth(method="lm") +
+  labs(x = "SCAARED social anxiety score", y = "error_hitRate") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + theme(axis.text = element_text(size = 15)) + theme(text = element_text(size = 18))
+lm_for_cor_fit_line <- lm(correct_hitRate ~ scaared_b_scrdSoc_s1_r1_e1, main_df)
+summary(lm_for_cor_fit_line)
+ggplot(main_df, aes(x=scaared_b_scrdSoc_s1_r1_e1, y=correct_hitRate)) + geom_point(size = 4) + geom_smooth(method="lm") +
+  labs(x = "SCAARED social anxiety score", y = "correct_hitRate") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + theme(axis.text = element_text(size = 15)) + theme(text = element_text(size = 18))
+
+
+lm_for_cor_fit_line <- lm(hitRate_error_minus_correct ~ scaared_b_scrdTotal_s1_r1_e1, main_df)
+summary(lm_for_cor_fit_line)
+cor.test(main_df$scaared_b_scrdTotal_s1_r1_e1, main_df$hitRate_error_minus_correct, method = 'pearson', na.action = na.omit)
+ggplot(main_df, aes(x=scaared_b_scrdSoc_s1_r1_e1, y=hitRate_error_minus_correct)) + geom_point(size = 4) + geom_smooth(method="lm") +
+  labs(x = "SCAARED total anxiety score", y = "Error vs. Correct Hit rate") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + theme(axis.text = element_text(size = 15)) + theme(text = element_text(size = 18))
+
+ggplot(main_df, aes(x=scaared_b_scrdTotal_s1_r1_e1, y=error_hitRate)) + geom_point(size = 4) + geom_smooth(method="lm") +
+  labs(x = "SCAARED total anxiety score", y = "error_hitRate") +
+  theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                     panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + theme(axis.text = element_text(size = 15)) + theme(text = element_text(size = 18))
+
+ggplot(main_df, aes(x=scaared_b_scrdTotal_s1_r1_e1, y=correct_hitRate)) + geom_point(size = 4) + geom_smooth(method="lm") +
+  labs(x = "SCAARED total anxiety score", y = "correct_hitRate") +
   theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                      panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + theme(axis.text = element_text(size = 15)) + theme(text = element_text(size = 18))
 
